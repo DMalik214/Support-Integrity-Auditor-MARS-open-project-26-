@@ -1,7 +1,6 @@
 # Support Integrity Auditor (SIA)
 
 **Project:** MARS Open Project 2026  
-**Status:** Finalized — documentation and submission package
 
 ---
 
@@ -17,28 +16,28 @@ The project does not rely on a labelled ground-truth dataset of mismatches. Inst
 
 ```
 .
-├── SIA_Cleaned_Notebook.ipynb      # Full integrated project notebook (Phases 1–4)
-├── train_pipeline.py               # Packaged training script
-├── predict.py                      # Packaged inference script
-├── customer_support_tickets.csv    # Input dataset (required, not included)
-├── sia_pseudo_labeled_v3.csv       # Output: pseudo-labeled tickets with mismatch flags
-├── sia_classifier_v1.joblib        # Output: trained severity classifier
-├── sia_tfidf_v1.joblib             # Output: fitted TF-IDF vectorizer
-├── dossier_output.csv              # Output: flat dossier table
-├── dossier_output.json             # Output: full nested dossier records
-├── predictions.csv                 # Output: batch inference summary
-├── dossiers.json                   # Output: batch inference full dossiers
-├── confusion_matrix.png            # Output: classifier evaluation plot
-├── feature_importance.png          # Output: top-10 feature importance plot
-├── requirements.txt
-└── README.md
+├── README.md
+├── Mars_open_project_2026.pdf          # Original project statement
+├── SIA_final.ipynb                     # Complete project notebook
+├── train_pipeline.py                   # Model training pipeline
+├── predict.py                          # Batch inference pipeline
+├── streamlit_app.py                    # Interactive dashboard
+├── requirements.txt                    # Project dependencies
+
+├── customer_support_tickets.csv        # Input dataset
+├── enhanced_customer_support_data.csv  # Processed/enhanced dataset
+├── adversarial_test_cases.csv          # Stress testing dataset
+
+├── architecture.png                    # System architecture diagram
+└── adversarial_evaluation.md           # Adversarial testing results
+
 ```
 
 ## Architecture
 
 The Support Integrity Auditor processes customer support tickets through four stages: severity inference, mismatch detection, evidence dossier generation, and inference.
 
-![SIA Architecture](images/architecture.png)
+![SIA Architecture](architecture.png)
 
 *Figure 1. End-to-end architecture of the Support Integrity Auditor.*
 
@@ -197,21 +196,6 @@ The dataset is template-based synthetic text. The subject field contains short, 
 - The classifier should be interpreted together with the leakage audit findings, since some columns in the source data are strongly correlated with priority and were excluded from training.
 ---
 
-## Artifacts Reference
-
-| File | Description |
-|------|-------------|
-| `sia_pseudo_labeled_v3.csv` | Cleaned tickets with inferred severity, mismatch flag, and mismatch type |
-| `sia_classifier_v1.joblib` | Trained LightGBM (or GB) classifier |
-| `sia_tfidf_v1.joblib` | Fitted TF-IDF vectorizer (max_features=1000, stop_words=english) |
-| `dossier_output.csv` | Flat CSV of all mismatch dossiers |
-| `dossier_output.json` | Full nested JSON dossiers with evidence lists |
-| `predictions.csv` | Batch inference summary (5-column flat file) |
-| `dossiers.json` | Batch inference full dossiers |
-| `confusion_matrix.png` | Test-set confusion matrix (4-class) |
-| `feature_importance.png` | Top 10 features by gain |
-
----
 
 ## Reproducibility
 
